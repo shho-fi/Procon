@@ -14,14 +14,10 @@ fn main() {
         count += if ch == '(' { 1 } else { -1 };
         left = std::cmp::min(left, count);
     }
-    left = std::cmp::min(left, 0);
     left = num::Signed::abs(&left);
-    let mut right = left;
-    for ch in s.chars() {
-        right += if ch == '(' { 1 } else { -1 };
-    }
+    let right = left + count;
     let pre = vec!['('; left as usize];
-    let suf = vec![')'; right as usize].into_iter();
+    let suf = vec![')'; right as usize];
     let res: String = pre
         .into_iter()
         .chain(s.chars().into_iter())
